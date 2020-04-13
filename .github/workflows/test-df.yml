@@ -1,0 +1,20 @@
+name: NanoPi-R2S Test Package
+on:
+  push:
+    paths:
+      - '.github/workflows/test-df.yml'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+        with:
+          ref: master
+
+      - name: Test Environment
+        run: |
+          sudo df
+          cd friendlywrt-rk3328
+          sudo du -d 3 -BM
+  
