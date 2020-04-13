@@ -11,12 +11,13 @@ jobs:
         run: |
           sudo df
           sudo pwd
-          sudo du -d 5 -BM
+          sudo du -d 2 -BM
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android/sdk
           sudo df
           mkdir NanoTest2
           cd NanoTest2
           sudo pwd
           sudo df
           cd /
-          sudo du -d 5 -BM
+          sudo du -d 2 -BM
           sudo df
