@@ -7,15 +7,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@master
-        with:
-          ref: master
-
       - name: Test Environment
         run: |
           sudo df
           sudo pwd
           sudo du -d 3 -BM
+          sudo df
+          sudo mkdir NanoTest
+          sudo cd NanoTest
+          sudo pwd
+          sudo df
+          cd /
+          sudo du -BM
           sudo df
   
