@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'CHANGELOG.md'
-      - '.github/workflow/NanoPi-R2S RK3328 OpenWrt 19.07 Build.yml'
+      - '.github/workflow/NanoPi-R2S\ RK3328\ OpenWrt\ 19.07\ Build.yml'
 
 jobs:
 
@@ -146,9 +146,10 @@ jobs:
       - name: Install UPX
         run: |
           ln -s /usr/bin/upx-ucl friendlywrt-rk3328/friendlywrt/staging_dir/host/bin/upx
-
+        
       - name: Build OpenWrt
         run: |
+          sudo df
           cd friendlywrt-rk3328
           sed -i 's/set -eu/set -u/' scripts/mk-friendlywrt.sh
           ./build.sh nanopi_r2s.mk
