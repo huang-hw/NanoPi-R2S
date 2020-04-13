@@ -13,8 +13,8 @@ jobs:
           sudo pwd
           sudo du -d 3 -BM
           sudo df
-          sudo mkdir NanoTest
-          sudo cd NanoTest
+          mkdir NanoTest
+          cd NanoTest
           sudo pwd
           sudo df
           cd /
