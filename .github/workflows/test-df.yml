@@ -15,6 +15,7 @@ jobs:
       - name: Test Environment
         run: |
           sudo df
-          cd friendlywrt-rk3328
+          sudo pwd
           sudo du -d 3 -BM
+          sudo df
   
