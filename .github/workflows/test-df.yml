@@ -11,13 +11,12 @@ jobs:
         run: |
           sudo df
           sudo pwd
-          sudo du -d 3 -BM
+          sudo du -d 5 -BM
           sudo df
-          mkdir NanoTest
-          cd NanoTest
+          mkdir NanoTest2
+          cd NanoTest2
           sudo pwd
           sudo df
           cd /
-          sudo du -BM
+          sudo du -d 5 -BM
           sudo df
-  
