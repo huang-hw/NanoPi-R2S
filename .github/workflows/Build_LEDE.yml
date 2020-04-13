@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'CHANGELOG.md'
-      - '.github/workflow/Build_LEDE.yml'
+      - '.github/workflows/Build_LEDE.yml'
 
 jobs:
 
