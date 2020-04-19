@@ -3,7 +3,7 @@ on:
   push:
     paths:
       - 'CHANGELOG.md'
-      - '.github/workflows/Build.yml'
+      - '.github/workflows/Kernel.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -82,24 +82,29 @@ jobs:
           sudo pwd
           sudo du -d 2 -BM
           ./build.sh nanopi_r2s.mk
-      - name: Save config.lite
+      #- name: Save config.lite
+      #  run: |
+      #    sudo df
+      #    sudo pwd
+      #    sudo du -d 2 -BM
+      #    cd friendlywrt-rk3328/friendlywrt
+      #    ./scripts/diffconfig.sh > ../out/config.lite
+      - name: List Kmod
         run: |
-          sudo df
-          sudo pwd
-          sudo du -d 2 -BM
-          cd friendlywrt-rk3328/friendlywrt
-          ./scripts/diffconfig.sh > ../out/config.lite
+          cd friendlywrt-rk3328/scripts/sd-fuse/out/output_rk3328_kmodules
+          ls -l
       - name: Assemble Artifact
         run: |
           rm -rf ./artifact/
           mkdir -p ./artifact/
-          find friendlywrt-rk3328/out/ -name "FriendlyWrt_*img*" | xargs -I{} sh -c 'f=$(basename $1); zip -r -j "./artifact/${f}.zip" $1' sh {} \;
-          find friendlywrt-rk3328/friendlywrt/bin/targets/rockchip-rk3328/generic -name "openwrt*-squashfs.img" | xargs -I{} sh -c 'f=$(basename $1); zip -r -j "./artifact/${f}.zip" $1' sh {} \;
+          #find friendlywrt-rk3328/out/ -name "FriendlyWrt_*img*" | xargs -I{} sh -c 'f=$(basename $1); zip -r -j "./artifact/${f}.zip" $1' sh {} \;
+          #find friendlywrt-rk3328/friendlywrt/bin/targets/rockchip-rk3328/generic -name "openwrt*-squashfs.img" | xargs -I{} sh -c 'f=$(basename $1); zip -r -j "./artifact/${f}.zip" $1' sh {} \;
           
-          cp friendlywrt-rk3328/friendlywrt/.config ./artifact/
-          cp friendlywrt-rk3328/out/config.lite ./artifact/
+          cp friendlywrt-rk3328/scripts/sd-fuse/out/output_rk3328_kmodules/ ./artifact/
+          #cp friendlywrt-rk3328/friendlywrt/.config ./artifact/
+          #cp friendlywrt-rk3328/out/config.lite ./artifact/
       - name: Upload Artifact
         uses: actions/upload-artifact@master
         with:
-          name: FriendlyWrt_NanoPi-R2S RK3328 v19.07
+          name: FriendlyWrt_NanoPi-R2S RK3328 Kernel
           path: ./artifact/
