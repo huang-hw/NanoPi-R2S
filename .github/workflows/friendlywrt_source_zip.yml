@@ -3,7 +3,7 @@ on:
   push:
     paths:
       - 'CHANGELOG.md'
-      - '.github/workflows/kernel_out_zip.yml'
+      - '.github/workflows/friendlywrt_source_zip.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -81,7 +81,7 @@ jobs:
           sudo df
           sudo pwd
           #sudo du -d 2 -BM
-          ./build.sh nanopi_r2s.mk
+      #    ./build.sh nanopi_r2s.mk
       #- name: Save config.lite
       #  run: |
       #    sudo df
@@ -92,7 +92,6 @@ jobs:
       - name: List Kmod
         run: |
           cd friendlywrt-rk3328/
-          ll -lR
           sudo du -d 1 -BM
           cd scripts/
           sudo du -d 1 -BM
@@ -104,6 +103,9 @@ jobs:
           sudo du -d 1 -BM
           cd lib/
           sudo du -d 1 -BM
+          cd ../../../../..
+          pwd
+          ll -lR
       - name: Assemble Artifact
         run: |
           rm -rf ./artifact/
@@ -112,8 +114,10 @@ jobs:
           #find friendlywrt-rk3328/out/ -name "FriendlyWrt_*img*" | xargs -I{} sh -c 'f=$(basename $1); zip -r -j "./artifact/${f}.zip" $1' sh {} \;
           #find friendlywrt-rk3328/friendlywrt/bin/targets/rockchip-rk3328/generic -name "openwrt*-squashfs.img" | xargs -I{} sh -c 'f=$(basename $1); zip -r -j "./artifact/${f}.zip" $1' sh {} \;
           
-          zip -r kernel-5.4.29-mod.zip friendlywrt-rk3328/scripts/sd-fuse/out/output_rk3328_kmodules/lib/modules/5.4.29/kernel/
-          cp kernel-5.4.29-mod.zip ./artifact/
+          zip -ry friendlywrt_source.zip friendlywrt-rk3328/
+          cp friendlywrt_source.zip ./artifact/
+#          zip -r kernel-5.4.29-mod.zip friendlywrt-rk3328/scripts/sd-fuse/out/output_rk3328_kmodules/lib/modules/5.4.29/kernel/
+#          cp kernel-5.4.29-mod.zip ./artifact/
 
           #zip -r out.zip friendlywrt-rk3328/out/
           #cp out.zip ./artifact/
