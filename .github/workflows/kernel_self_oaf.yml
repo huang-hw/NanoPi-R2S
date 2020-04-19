@@ -2,7 +2,7 @@ name: NanoPi-R2S Build Kernel
 on:
   push:
     paths:
-      - 'CHANGELOG.md'
+      #- 'CHANGELOG.md'
       - '.github/workflows/kernel_self_oaf.yml'
 jobs:
   build:
