@@ -38,7 +38,6 @@ jobs:
           repo sync -c --no-clone-bundle -j8
           sudo df
           sudo pwd
-          sudo du -d 2 -BM
       - name: Install OAF
         run: |
           cd friendlywrt-rk3328          
@@ -71,6 +70,7 @@ jobs:
           pwd
           ls -l
           rm OpenAppFilter/ -rf
+          ls -l
       - name: Build OpenWrt
         run: |
           cd friendlywrt-rk3328
@@ -80,7 +80,7 @@ jobs:
           cat scripts/build.sh
           sudo df
           sudo pwd
-          sudo du -d 2 -BM
+          #sudo du -d 2 -BM
           ./build.sh nanopi_r2s.mk
       #- name: Save config.lite
       #  run: |
@@ -91,16 +91,17 @@ jobs:
       #    ./scripts/diffconfig.sh > ../out/config.lite
       - name: List Kmod
         run: |
-          cd friendlywrt-rk3328/scripts/sd-fuse/out/output_rk3328_kmodules
+          cd friendlywrt-rk3328/scripts/sd-fuse/out/output_rk3328_kmodules/lib
           ls -l
       - name: Assemble Artifact
         run: |
           rm -rf ./artifact/
           mkdir -p ./artifact/
+          ls -lR friendlywrt-rk3328/out/
           #find friendlywrt-rk3328/out/ -name "FriendlyWrt_*img*" | xargs -I{} sh -c 'f=$(basename $1); zip -r -j "./artifact/${f}.zip" $1' sh {} \;
           #find friendlywrt-rk3328/friendlywrt/bin/targets/rockchip-rk3328/generic -name "openwrt*-squashfs.img" | xargs -I{} sh -c 'f=$(basename $1); zip -r -j "./artifact/${f}.zip" $1' sh {} \;
           
-          cp friendlywrt-rk3328/scripts/sd-fuse/out/output_rk3328_kmodules/ ./artifact/
+          cp -r friendlywrt-rk3328/scripts/sd-fuse/out/output_rk3328_kmodules/lib/ ./artifact/
           #cp friendlywrt-rk3328/friendlywrt/.config ./artifact/
           #cp friendlywrt-rk3328/out/config.lite ./artifact/
       - name: Upload Artifact
