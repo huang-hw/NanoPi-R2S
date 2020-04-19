@@ -3,7 +3,7 @@ on:
   push:
     paths:
       - 'CHANGELOG.md'
-      - '.github/workflows/kernel_all_zip.yml'
+      - '.github/workflows/kernel_self_oaf.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -41,7 +41,7 @@ jobs:
       - name: Install OAF
         run: |
           cd friendlywrt-rk3328          
-          git clone https://github.com/destan19/OpenAppFilter.git
+          git clone https://github.com/huang-hw/OpenAppFilter.git
           ls -l
           cd kernel/net/
           pwd
@@ -92,20 +92,33 @@ jobs:
       - name: List Kmod
         run: |
           cd friendlywrt-rk3328/
+          ll -lR
           sudo du -d 1 -BM
-          cd scripts/sd-fuse/out/output_rk3328_kmodules/lib
-          ls -l
+          cd scripts/
+          sudo du -d 1 -BM
+          cd sd-fuse/
+          sudo du -d 1 -BM
+          cd out/
+          sudo du -d 1 -BM
+          cd output_rk3328_kmodules/
+          sudo du -d 1 -BM
+          cd lib/
+          sudo du -d 1 -BM
       - name: Assemble Artifact
         run: |
           rm -rf ./artifact/
           mkdir -p ./artifact/
-          #ls -lR friendlywrt-rk3328/out/
+          ll -lR friendlywrt-rk3328/out/
+          du -d 5 -BM
           #find friendlywrt-rk3328/out/ -name "FriendlyWrt_*img*" | xargs -I{} sh -c 'f=$(basename $1); zip -r -j "./artifact/${f}.zip" $1' sh {} \;
           #find friendlywrt-rk3328/friendlywrt/bin/targets/rockchip-rk3328/generic -name "openwrt*-squashfs.img" | xargs -I{} sh -c 'f=$(basename $1); zip -r -j "./artifact/${f}.zip" $1' sh {} \;
           
-          zip -r friendlywrt-rk3328.zip friendlywrt-rk3328/
-          cp friendlywrt-rk3328.zip ./artifact/
-          ls -l
+          zip -r kernel-5.4.29-mod.zip friendlywrt-rk3328/scripts/sd-fuse/out/output_rk3328_kmodules/lib/modules/5.4.29/kernel/
+          cp kernel-5.4.29-mod.zip ./artifact/
+
+          #zip -r out.zip friendlywrt-rk3328/out/
+          #cp out.zip ./artifact/
+          
 #          cp -r friendlywrt-rk3328/scripts/sd-fuse/out/output_rk3328_kmodules/lib/ ./artifact/
           #cp friendlywrt-rk3328/friendlywrt/.config ./artifact/
           #cp friendlywrt-rk3328/out/config.lite ./artifact/
