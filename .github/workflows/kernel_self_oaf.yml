@@ -92,7 +92,7 @@ jobs:
       - name: List Kmod
         run: |
           cd friendlywrt-rk3328/
-          ll -lR
+          ls -lR
           sudo du -d 1 -BM
           cd scripts/
           sudo du -d 1 -BM
@@ -108,7 +108,7 @@ jobs:
         run: |
           rm -rf ./artifact/
           mkdir -p ./artifact/
-          ll -lR friendlywrt-rk3328/out/
+          ls -lR friendlywrt-rk3328/out/
           du -d 5 -BM
           #find friendlywrt-rk3328/out/ -name "FriendlyWrt_*img*" | xargs -I{} sh -c 'f=$(basename $1); zip -r -j "./artifact/${f}.zip" $1' sh {} \;
           #find friendlywrt-rk3328/friendlywrt/bin/targets/rockchip-rk3328/generic -name "openwrt*-squashfs.img" | xargs -I{} sh -c 'f=$(basename $1); zip -r -j "./artifact/${f}.zip" $1' sh {} \;
