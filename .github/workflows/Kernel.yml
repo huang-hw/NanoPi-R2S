@@ -97,11 +97,12 @@ jobs:
         run: |
           rm -rf ./artifact/
           mkdir -p ./artifact/
-          ls -lR friendlywrt-rk3328/out/
+          ll -lR friendlywrt-rk3328/out/
+          du -d 5 -BM
           #find friendlywrt-rk3328/out/ -name "FriendlyWrt_*img*" | xargs -I{} sh -c 'f=$(basename $1); zip -r -j "./artifact/${f}.zip" $1' sh {} \;
           #find friendlywrt-rk3328/friendlywrt/bin/targets/rockchip-rk3328/generic -name "openwrt*-squashfs.img" | xargs -I{} sh -c 'f=$(basename $1); zip -r -j "./artifact/${f}.zip" $1' sh {} \;
           
-          cp -r friendlywrt-rk3328/scripts/sd-fuse/out/output_rk3328_kmodules/lib/ ./artifact/
+          cp -r friendlywrt-rk3328/scripts/sd-fuse/out/output_rk3328_kmodules/lib/modules/5.4.29/kernel/ ./artifact/
           #cp friendlywrt-rk3328/friendlywrt/.config ./artifact/
           #cp friendlywrt-rk3328/out/config.lite ./artifact/
       - name: Upload Artifact
