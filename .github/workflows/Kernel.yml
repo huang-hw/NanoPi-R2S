@@ -53,9 +53,9 @@ jobs:
           cp OpenAppFilter/oaf/src/* kernel/net/oaf/
           
           cd kernel/net/oaf/
-          sed -i 's/^obj-m/obj-y/' Makefile
-          cat Makefile
-          sed -i '$aobj-y += oaf\/' ../Makefile
+          #sed -i 's/^obj-m/obj-y/' Makefile
+          #cat Makefile
+          sed -i '$aobj-m += oaf\/' ../Makefile
           cat ../Makefile
           
           sed -i 's/int af_log_lvl = 1/int af_log_lvl = 4/' af_log.c
