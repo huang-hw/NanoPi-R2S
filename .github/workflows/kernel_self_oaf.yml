@@ -1,4 +1,4 @@
-name: NanoPi-R2S Build Kernel
+name: NanoPi-R2S Build Kernel Modules
 on:
   push:
     paths:
@@ -125,5 +125,5 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@master
         with:
-          name: FriendlyWrt_NanoPi-R2S RK3328 Kernel
+          name: FriendlyWrt_NanoPi-R2S RK3328 Kernel Modules
           path: ./artifact/
