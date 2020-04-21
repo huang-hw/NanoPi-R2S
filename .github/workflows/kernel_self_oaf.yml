@@ -40,7 +40,10 @@ jobs:
           sudo pwd
       - name: Install OAF
         run: |
-          cd friendlywrt-rk3328          
+          cd friendlywrt-rk3328
+          cd friendlywrt/dl
+          ls -l
+          cd ../..       
           git clone https://github.com/huang-hw/OpenAppFilter.git
           ls -l
           cd kernel/net/
